@@ -155,7 +155,7 @@ export default function PrivacyPage() {
         <>
           <p>
             The intended provider is Google AdSense, under publisher account{" "}
-            <code>pub-1973018352310576</code>. When it is switched on, Google and its partners will
+            <code>pub-3788258528493052</code>. When it is switched on, Google and its partners will
             serve ads here and, like any ad network, will use cookies and similar identifiers to do
             it. This page will be rewritten to say that advertising is live on the day it goes
             live, rather than describing it in the future tense as it does now.

@@ -7,4 +7,4 @@
 # MONETISATION.md for the placement map that applies once serving is switched
 # on. Ad slots reserve a fixed height, so serving can begin without moving a
 # single pixel.
-google.com, pub-1973018352310576, DIRECT, f08c47fec0942fa0
+google.com, pub-3788258528493052, DIRECT, f08c47fec0942fa0

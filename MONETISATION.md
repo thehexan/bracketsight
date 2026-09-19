@@ -352,7 +352,7 @@ Nothing below happens before AdSense approves the site.
    the site answers on `www.bracketsight.com` with the account registered to `bracketsight.com`, or
    the reverse, confirm the redirect preserves `/ads.txt`.
 2. Confirm `https://<origin>/ads.txt` returns HTTP 200 as `text/plain` with the record
-   `google.com, pub-1973018352310576, DIRECT, f08c47fec0942fa0`.
+   `google.com, pub-3788258528493052, DIRECT, f08c47fec0942fa0`.
 
 ### Step 1 — create the ad units
 
@@ -382,7 +382,7 @@ On Vercel: Project Settings → Environment Variables → Production, then **red
 
 ```
 NEXT_PUBLIC_ADS_MODE=on
-NEXT_PUBLIC_AD_CLIENT=ca-pub-1973018352310576
+NEXT_PUBLIC_AD_CLIENT=ca-pub-3788258528493052
 NEXT_PUBLIC_AD_LOADER_SRC=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js
 NEXT_PUBLIC_AD_UNIT_TAG=adsbygoogle
 ```
