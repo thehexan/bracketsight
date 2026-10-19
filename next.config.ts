@@ -3,6 +3,36 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+
+  /*
+   * CAP THE BUILD WORKERS. THE DEPLOY HOST CANNOT SPAWN 63 OF THEM.
+   *
+   * Next sizes its build worker pool from `os.cpus().length - 1`. The deploy
+   * container reports 64 CPUs and then refuses the threads to match, so the
+   * build reached "Collecting page data using 63 workers" and every worker
+   * died inside its own Rust runtime:
+   *
+   *     OS can't spawn worker thread: Resource temporarily unavailable (os error 11)
+   *     Next.js build worker exited with code: null and signal: SIGABRT
+   *
+   * `os error 11` is EAGAIN: the container caps threads or processes, not
+   * memory. 64 reported CPUs times a Rust thread pool per worker is tens of
+   * thousands of threads asked for and refused. The same exhaustion is what
+   * broke the Turbopack build before this one, where it surfaced as a loader
+   * subprocess that "exited before we could connect to it" — a different
+   * symptom of one cause, which is why fixing the bundler alone did not fix
+   * the build.
+   *
+   * Two is not a performance compromise worth reclaiming: this site
+   * prerenders 73 pages in well under a second either way, because the slow
+   * half of the build is compilation, which this number does not govern.
+   *
+   * Any value other than the default counts as a user override, so this is
+   * honoured on every machine rather than only on small ones.
+   */
+  experimental: {
+    cpus: 2,
+  },
   // The five engines are workspace source packages, not built artefacts.
   transpilePackages: [
     "@/engines/repayment",
