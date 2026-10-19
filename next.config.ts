@@ -63,6 +63,34 @@ const nextConfig: NextConfig = {
 };
 
 /*
+ * WHY `npm run build` PASSES `--webpack`.
+ *
+ * `@next/mdx` is a webpack loader. Turbopack — the default bundler for
+ * `next build` since Next 16 — can run one, but only by spawning a separate
+ * Node process and talking to it over IPC. On a constrained build container
+ * that spawn fails, and it fails with an error that names neither memory nor
+ * MDX:
+ *
+ *     Reading source code for parsing failed
+ *     - creating new process
+ *     - node process exited before we could connect to it with exit status: 0
+ *
+ * reported once per article under `content/posts`. It reproduces on no local
+ * machine, because a laptop can always fork the helper; it reproduced on the
+ * deploy host on 2026-10-20 after a build that ran for nearly nine minutes
+ * before giving up.
+ *
+ * Webpack runs loaders in-process, so the bridge that breaks is never built.
+ * The output is the same site: both bundlers were built from this commit and
+ * `npm run seo:check` reports the identical 57 routes, 67 JSON-LD blocks, 0
+ * broken links and 0 orphans from each.
+ *
+ * `npm run build:turbopack` keeps the faster local path. Use it freely — just
+ * do not make it what CI and the host run, or this comes back silently as a
+ * nine-minute red build.
+ */
+
+/*
  * MDX, kept to the smallest configuration that works.
  *
  * `remark-frontmatter` is the whole reason a plugin list exists here: without
