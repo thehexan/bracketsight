@@ -201,7 +201,7 @@ Extended:        level payment, 300 months, requires >$30,000 in eligible loans`
             sources page
           </Link>
           , and summarised across all five tools on{" "}
-          <Link href="/about" className="underline underline-offset-4">
+          <Link href="/about-us" className="underline underline-offset-4">
             about
           </Link>
           .

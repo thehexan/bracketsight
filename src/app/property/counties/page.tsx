@@ -90,7 +90,7 @@ export default function CountiesPage() {
 
       <p className="mt-4 max-w-[68ch] text-dim">
         If you want your county added, send its assessor or board URL to the address on the{" "}
-        <Link href="/contact" className="underline underline-offset-4">
+        <Link href="/contact-us" className="underline underline-offset-4">
           contact page
         </Link>
         . Counties whose rules are published in a readable form get encoded first, because those

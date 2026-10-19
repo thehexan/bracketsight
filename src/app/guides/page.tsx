@@ -345,7 +345,7 @@ export default function GuidesIndexPage() {
           simplification. Where a guide prints one, the register&rsquo;s own words appear under the
           number, together with what would close the item, rather than a footnote a reader has to go
           looking for. The register itself is summarised on the{" "}
-          <Link href="/about" className={LINK}>
+          <Link href="/about-us" className={LINK}>
             about page
           </Link>
           .

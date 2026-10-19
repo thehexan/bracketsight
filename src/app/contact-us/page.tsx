@@ -10,7 +10,7 @@ import { CONTACT_EMAIL, DISCLAIMER, SITE_NAME } from "@/lib/site";
  * `src/lib/seo/routes.ts`, where all 55 routes are measured against each other
  * for length and uniqueness at build time. A page does not write its own.
  */
-export const metadata: Metadata = pageMetadata("/contact");
+export const metadata: Metadata = pageMetadata("/contact-us");
 
 /**
  * Contact.
@@ -43,7 +43,11 @@ const WRITE_ABOUT: readonly { heading: string; body: string }[] = [
 export default function ContactPage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-12">
-      <h1 className="max-w-[24ch]">Report a wrong figure or a rule that changed</h1>
+      <h1 className="max-w-[24ch]">Contact Us</h1>
+
+      <p className="mt-3 max-w-[68ch] text-step-1 text-dim">
+        Report a wrong figure, or a rule that changed.
+      </p>
 
       <p className="mt-4 max-w-[68ch] text-step-1">
         Email{" "}
@@ -93,7 +97,7 @@ export default function ContactPage() {
         provider, county or contractor, and none of those pays for placement anywhere on it. How a
         rule gets from a regulation into a number here, how the site is funded, and which figures
         are still recorded as unverified are all set out on the{" "}
-        <Link href="/about" className="rounded-atlas underline underline-offset-4 hover:text-ink">
+        <Link href="/about-us" className="rounded-atlas underline underline-offset-4 hover:text-ink">
           about page
         </Link>
         , and the verification process itself — including the reviews that have not happened yet
@@ -157,7 +161,7 @@ export default function ContactPage() {
       <p className="hairline-t mt-8 max-w-[68ch] pt-6 text-dim">
         Before you write: the{" "}
         <Link
-          href="/about"
+          href="/about-us"
           className="rounded-atlas underline decoration-rule underline-offset-4 hover:decoration-current"
         >
           register of unverified items

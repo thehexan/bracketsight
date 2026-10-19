@@ -59,7 +59,7 @@ export default function NotFound() {
           five tools
         </Link>{" "}
         or read{" "}
-        <Link href="/about" className="rounded-atlas text-ink underline underline-offset-4">
+        <Link href="/about-us" className="rounded-atlas text-ink underline underline-offset-4">
           how the rules behind them are verified
         </Link>
         .

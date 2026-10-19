@@ -143,7 +143,7 @@ export default function AboutPage() {
         <p>
           Six, listed below with the source that would close each one. Nothing has been filled
           in with an estimate. The same register, summarised across all five tools, is on{" "}
-          <Link href="/about" className="underline underline-offset-4">
+          <Link href="/about-us" className="underline underline-offset-4">
             about Bracketsight
           </Link>
           .

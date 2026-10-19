@@ -155,8 +155,8 @@ export function ConsentBanner() {
             This site plans to carry advertising, and ad networks set cookies to do it. None is
             set unless you accept, and nothing here is withheld if you decline. What you type
             into a calculator stays on your own device either way —{" "}
-            <Link href="/privacy" className="rounded-atlas text-ink underline underline-offset-4">
-              privacy and cookies
+            <Link href="/cookie-policy" className="rounded-atlas text-ink underline underline-offset-4">
+              cookie policy
             </Link>
             .
           </p>

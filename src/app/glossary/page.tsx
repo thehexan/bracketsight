@@ -130,7 +130,7 @@ export default function GlossaryPage() {
       <p className="mt-10 text-dim" style={{ fontSize: "var(--text-step--1)" }}>
         A term missing, or a definition that reads wrong?{" "}
         <Link
-          href="/contact"
+          href="/contact-us"
           className="rounded-atlas underline decoration-rule underline-offset-4 hover:decoration-current"
         >
           Tell us

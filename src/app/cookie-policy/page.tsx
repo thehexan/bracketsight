@@ -13,59 +13,37 @@ import { ADSENSE_VERIFICATION_CLIENT as ADSENSE_CLIENT } from "@/lib/ads/config"
 
 /*
  * Title, description and canonical come from the route registry in
- * `src/lib/seo/routes.ts`, where all 55 routes are measured against each other
+ * `src/lib/seo/routes.ts`, where every route is measured against the others
  * for length and uniqueness at build time. A page does not write its own.
  */
-export const metadata: Metadata = pageMetadata("/privacy");
+export const metadata: Metadata = pageMetadata("/cookie-policy");
 
 /**
- * Privacy and cookies.
+ * Cookie policy — storage, the consent banner, and advertising identifiers.
  *
- * Every disclosure below is the same sentence it was before this page was
- * re-laid-out: the AdSense publisher ID, the two Google policy links, the two
- * opt-out routes, the UK/EU lawful-basis paragraph, the server-log paragraph
- * and the uploaded-document position. Nothing was shortened and nothing was
- * merged. Only the shape changed — see `@/components/layout/PolicyPage`.
+ * SPLIT OUT OF `/privacy`, which carried both. The two questions a reader
+ * actually arrives with are "what do you know about me" and "what are you
+ * storing on my machine, and how do I say no", and the second one is the one
+ * a consent banner sends them looking for. It now has a URL of its own that
+ * the banner itself can point at.
+ *
+ * THE CONDITIONAL BELOW IS LOAD-BEARING. `ADSENSE_CLIENT` is the verification
+ * tag's publisher ID. When it is set, Google's script is in the document head
+ * and CAN set cookies even though no ad unit renders anywhere; when it is not,
+ * no ad network script is loaded at all. The page must state whichever of
+ * those is true of the build the reader is looking at, because a reader can
+ * check it in one view-source and a reviewer certainly will.
  *
  * BUMP `UPDATED` IN THE SAME EDIT that changes any wording below, and rewrite
- * the advertising section on the day advertising actually goes live: it is
- * written in the future tense because that is currently true, and leaving it in
+ * the advertising paragraphs on the day advertising actually goes live: they
+ * are in the future tense because that is currently true, and leaving them in
  * the future tense once ads are serving would be a false statement about
  * personal data.
  */
-/* The visible "Last updated" stamp AND the sitemap's <lastmod> for this
-   page, from one constant. Four policy pages each held their own copy of this
-   date, which is four chances for the stamp a reader sees to disagree with the
-   date submitted to a crawler. See src/lib/seo/routes.ts. */
 const UPDATED = POLICY_UPDATED;
 
-export default function PrivacyPage() {
+export default function CookiePolicyPage() {
   const sections: readonly PolicySection[] = [
-    {
-      id: "what-you-type",
-      heading: "What happens to what I type?",
-      children: (
-        <p>
-          It stays on your own device. Each tool saves your work to your browser&rsquo;s{" "}
-          <code>localStorage</code> so you can close the tab and come back, and it is stored under
-          a key belonging to that tool. Clearing your browser&rsquo;s site data deletes it. Nobody
-          else can read it, including us.
-        </p>
-      ),
-    },
-    {
-      id: "shared-links",
-      heading: "What about the link I can share?",
-      children: (
-        <p>
-          Some tools let you share a scenario as a link. That scenario is encoded in the URL{" "}
-          <em>fragment</em> — the part after the <code>#</code> — and browsers never transmit the
-          fragment to a server. It is not in our access logs because it never reaches us. Anyone
-          you send the link to can read those numbers, so treat the link itself as the private
-          thing.
-        </p>
-      ),
-    },
     {
       id: "cookies",
       heading: "Do you use cookies?",
@@ -98,6 +76,14 @@ export default function PrivacyPage() {
             advertising. Nothing you type into a calculator is sent to Google, or to anyone —
             that is a property of how the tools are built, not a promise about advertising.
           </p>
+        </>
+      ),
+    },
+    {
+      id: "what-is-stored",
+      heading: "What is stored on my device?",
+      children: (
+        <>
           <p>
             What the site does store, it stores on your own device, and there are only two things:
           </p>
@@ -176,23 +162,6 @@ export default function PrivacyPage() {
             .
           </p>
           <p>
-            You can opt out of personalised advertising by Google at{" "}
-            <a href="https://www.google.com/settings/ads" rel="noopener">
-              google.com/settings/ads
-            </a>
-            , and out of a third-party vendor&rsquo;s use of cookies for personalised advertising
-            at{" "}
-            <a href="https://www.aboutads.info/choices/" rel="noopener">
-              aboutads.info/choices
-            </a>{" "}
-            or, in Europe, at{" "}
-            <a href="https://www.youronlinechoices.eu/" rel="noopener">
-              youronlinechoices.eu
-            </a>
-            . Refusing personalisation does not remove the ads; it means they are chosen from the
-            content of the page and your approximate location rather than from a profile of you.
-          </p>
-          <p>
             One thing will not change: an ad network never receives what you type into a tool. Your
             income, balances, assessed values and job costs are computed in your own browser and
             are never sent anywhere, so there is nothing for an advertiser to be given. No result,
@@ -204,60 +173,56 @@ export default function PrivacyPage() {
       ),
     },
     {
-      id: "uk-eu",
-      heading: "If you are in the UK or the EU",
+      id: "opting-out",
+      heading: "How do I refuse personalised advertising?",
       children: (
         <>
           <p>
-            The lawful basis for the advertising storage described above is your consent, given
-            through the banner, and you may withdraw it at any time from the footer without giving
-            a reason and without losing access to anything. The lawful basis for storing your work
-            in a tool is that it is necessary to provide the calculator you asked to use.
+            Through the banner, or the <strong>Cookie choices</strong> control in the footer, which
+            governs what this site does. For the wider settings that follow you between sites:
           </p>
+          <ul>
+            <li>
+              Google&rsquo;s own personalisation switch is at{" "}
+              <a href="https://www.google.com/settings/ads" rel="noopener">
+                google.com/settings/ads
+              </a>
+              .
+            </li>
+            <li>
+              A third-party vendor&rsquo;s use of cookies for personalised advertising can be
+              refused at{" "}
+              <a href="https://www.aboutads.info/choices/" rel="noopener">
+                aboutads.info/choices
+              </a>{" "}
+              or, in Europe, at{" "}
+              <a href="https://www.youronlinechoices.eu/" rel="noopener">
+                youronlinechoices.eu
+              </a>
+              .
+            </li>
+            <li>
+              Your browser&rsquo;s own settings can block or clear cookies for this site and every
+              other one. Nothing here depends on a cookie, so blocking them costs you no
+              functionality.
+            </li>
+          </ul>
           <p>
-            The site holds no account and no profile, so the rights of access, rectification,
-            erasure and portability have very little to operate on. The only thing recorded
-            server-side is the ordinary web request log described below, which contains an IP
-            address and no financial input of any kind; everything else lives on your own device,
-            and clearing your site data erases it. If you want to know what a log holds for a given
-            date, or want it purged, write to the address below and say so.
+            Refusing personalisation does not remove the ads; it means they are chosen from the
+            content of the page and your approximate location rather than from a profile of you.
           </p>
         </>
       ),
     },
     {
-      id: "uploads",
-      heading: "Will you ever process a document I upload?",
-      children: (
-        <p>
-          Not today. A planned feature would read a statement or notice you upload to fill the form
-          in for you. If it ships, the file will be processed in memory and never written to disk
-          or object storage, its contents will never be logged, and the extracted figures will
-          always be shown to you for confirmation before anything is calculated. That is a design
-          constraint, not a preference.
-        </p>
-      ),
-    },
-    {
-      id: "collected",
-      heading: "What do you collect at all?",
-      children: (
-        <p>
-          Ordinary web server request logs — the page requested, a timestamp, a browser user-agent,
-          and an IP address — which are what any web host records in order to serve a page. They
-          contain none of your financial inputs.
-        </p>
-      ),
-    },
-    {
       id: "contact",
-      heading: "How do I ask a question or have something removed?",
+      heading: "How do I ask a question about this?",
       children: (
         <p>
           Write to{" "}
-          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Since we hold nothing that
-          identifies you, there is generally nothing to remove — but if you think otherwise, say so
-          and we will look.
+          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. The{" "}
+          <Link href="/privacy-policy">privacy policy</Link> covers what is collected at all, the
+          lawful basis for it in the UK and the EU, and what a server log holds.
         </p>
       ),
     },
@@ -265,13 +230,13 @@ export default function PrivacyPage() {
 
   return (
     <PolicyPage
-      eyebrow="Privacy notice"
-      title="Privacy and cookies"
+      eyebrow="Cookie policy"
+      title="Cookie Policy"
       standfirst={
         <>
-          Every calculator on this site runs entirely in your browser. The numbers you type —
-          income, loan balances, assessed values, job costs — are never sent to a server, because
-          there is no server to send them to. There is no account, no login and no database.
+          This site sets <strong>no cookies of its own</strong> and runs no analytics that identify
+          you. Two things are stored on your device — your work in a tool, and your answer to the
+          cookie banner — and both are deleted when you clear your site data.
         </>
       }
       updated={UPDATED}
@@ -279,8 +244,8 @@ export default function PrivacyPage() {
       sections={sections}
       footnote={
         <>
-          See also the <Link href="/terms">terms and disclaimer</Link>, which explain what these
-          estimates are and are not.
+          See also the <Link href="/privacy-policy">privacy policy</Link>, which explains why
+          nothing you type into a calculator ever leaves your browser.
         </>
       }
     />

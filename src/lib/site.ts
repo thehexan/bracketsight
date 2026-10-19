@@ -240,11 +240,13 @@ export type StaticPage = { readonly href: string; readonly label: string };
  * `/terms` was four clicks from the hub and reachable only via `/privacy`.
  */
 export const TRUST_PAGES: readonly StaticPage[] = [
-  { href: "/about", label: "About" },
+  { href: "/about-us", label: "About Us" },
   { href: "/authors", label: "Who writes and checks this" },
-  { href: "/contact", label: "Contact" },
-  { href: "/privacy", label: "Privacy and cookies" },
-  { href: "/terms", label: "Terms and disclaimer" },
+  { href: "/contact-us", label: "Contact Us" },
+  { href: "/privacy-policy", label: "Privacy Policy" },
+  { href: "/cookie-policy", label: "Cookie Policy" },
+  { href: "/terms-and-conditions", label: "Terms and Conditions" },
+  { href: "/disclaimer", label: "Disclaimer" },
 ] as const;
 
 /**

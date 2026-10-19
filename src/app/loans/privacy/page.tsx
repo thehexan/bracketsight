@@ -18,7 +18,7 @@ export default function PrivacyPage() {
         <h1 className="leading-tight">How your loan data is handled</h1>
         <p className="text-dim mt-1">
           Effective 8 Aug 2026. This page covers the student loan tool specifically — the{" "}
-          <Link href="/privacy" className="underline underline-offset-4">
+          <Link href="/privacy-policy" className="underline underline-offset-4">
             site privacy policy
           </Link>{" "}
           covers everything else.
@@ -145,7 +145,7 @@ export default function PrivacyPage() {
           receive what you type here, because it never leaves your browser and there is nothing
           to hand over. No ad slot sits inside the tool, where it could be mistaken for part of
           a result. The{" "}
-          <Link href="/privacy" className="underline underline-offset-4">
+          <Link href="/privacy-policy" className="underline underline-offset-4">
             site privacy policy
           </Link>{" "}
           sets out the advertising position in full.

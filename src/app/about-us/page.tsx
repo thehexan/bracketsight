@@ -12,7 +12,7 @@ import { CONTACT_EMAIL, MAINTAINER, SECTIONS, SITE_NAME, sectionHref } from "@/l
  * `src/lib/seo/routes.ts`, where all 55 routes are measured against each other
  * for length and uniqueness at build time. A page does not write its own.
  */
-export const metadata: Metadata = pageMetadata("/about");
+export const metadata: Metadata = pageMetadata("/about-us");
 
 /**
  * The site-level About page.
@@ -230,7 +230,7 @@ export default function AboutPage() {
           no account, no signup wall and no database. Work is saved to your own browser&rsquo;s
           storage, and a shared scenario link carries its numbers in the URL fragment, which
           browsers never transmit. The full detail is in the{" "}
-          <Link href="/privacy">privacy notice</Link>.
+          <Link href="/privacy-policy">privacy policy</Link>.
         </p>
       ),
     },
@@ -244,7 +244,7 @@ export default function AboutPage() {
           updated, the pages recompute, and the change is recorded in that tool&rsquo;s changelog
           with the date and the source. Corrections are never taken on a secondary source, however
           confident it sounds. What to include, and what this address cannot do, is on the{" "}
-          <Link href="/contact">contact page</Link>.
+          <Link href="/contact-us">contact page</Link>.
         </p>
       ),
     },
@@ -253,7 +253,7 @@ export default function AboutPage() {
   return (
     <PolicyPage
       eyebrow={`About ${SITE_NAME}`}
-      title={`About ${SITE_NAME}`}
+      title="About Us"
       standfirst={
         <>
           {SITE_NAME} runs <strong className="num">5</strong> independent engines over US federal and local money
@@ -272,7 +272,7 @@ export default function AboutPage() {
       footnote={
         <>
           These tools produce estimates from published rules. They are not financial, tax or legal
-          advice — see the <Link href="/terms">terms and disclaimer</Link>.
+          advice — see the <Link href="/terms-and-conditions">terms and conditions</Link>.
         </>
       }
     />

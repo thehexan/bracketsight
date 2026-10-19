@@ -230,7 +230,7 @@ export function organization(): Node {
         "@type": "ContactPoint",
         contactType: "corrections and support",
         email: CONTACT_EMAIL,
-        url: absoluteUrl("/contact"),
+        url: absoluteUrl("/contact-us"),
         availableLanguage: ["en"],
       },
     ],

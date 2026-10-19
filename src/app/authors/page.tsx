@@ -340,8 +340,8 @@ export default function AuthorsPage() {
       footnote={
         <>
           This page describes how figures are produced and checked. It is not a claim that they are
-          advice — see the <Link href="/terms">terms and disclaimer</Link>, and the wider account of
-          what the site is on <Link href="/about">about</Link>.
+          advice — see the <Link href="/terms-and-conditions">terms and conditions</Link>, and the wider account of
+          what the site is on <Link href="/about-us">about</Link>.
         </>
       }
     />

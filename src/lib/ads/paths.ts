@@ -24,9 +24,11 @@
  * demonstrate it; /loans/privacy because the loans section carries its own.
  */
 export const AD_FREE_PATHS: readonly string[] = [
-  "/contact",
-  "/privacy",
-  "/terms",
+  "/contact-us",
+  "/privacy-policy",
+  "/cookie-policy",
+  "/terms-and-conditions",
+  "/disclaimer",
   "/loans/privacy",
 ];
 
@@ -45,7 +47,7 @@ export const AD_FREE_PATHS: readonly string[] = [
  * anyway — so the principled answer and the commercial answer agree.
  */
 export const AD_FREE_SUFFIXES: readonly string[] = [
-  "/about",
+  "/about-us",
   "/authors",
   "/methodology",
   "/pricing-methodology",

@@ -177,7 +177,7 @@ export default function EditorialPolicyPage() {
           could be mistaken for part of the result — an optional paid PDF report, and clearly
           labelled affiliate links shown only when the engine determines they serve you, always
           with any forfeited benefit disclosed at equal visual weight. The{" "}
-          <Link href="/privacy" className="underline underline-offset-4">
+          <Link href="/privacy-policy" className="underline underline-offset-4">
             site privacy policy
           </Link>{" "}
           states what changes on the day advertising is switched on.

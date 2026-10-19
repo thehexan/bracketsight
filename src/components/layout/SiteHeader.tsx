@@ -38,7 +38,7 @@ import { ThemeToggle } from "./ThemeToggle";
 
 type NavItem = { href: string; label: string };
 
-const EXTRA_NAV: readonly NavItem[] = [{ href: "/contact", label: "Contact" }];
+const EXTRA_NAV: readonly NavItem[] = [{ href: "/contact-us", label: "Contact" }];
 
 function isActive(pathname: string, href: string): boolean {
   return pathname === href || pathname.startsWith(`${href}/`);

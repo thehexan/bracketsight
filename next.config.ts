@@ -22,6 +22,39 @@ const nextConfig: NextConfig = {
    * request — but tracing the files keeps a standalone server honest if a
    * route is ever made dynamic. Cheap insurance against a silent empty page.
    */
+  /*
+   * THE LEGAL PAGES MOVED, AND THE OLD URLS MUST NOT 404.
+   *
+   * `/privacy` carried both the data notice and the cookie inventory, and
+   * `/terms` carried both the agreement and the accuracy disclaimer. Each is
+   * now two pages, because a reader arrives looking for one or the other and
+   * a consent banner sends them looking specifically for the cookie half.
+   *
+   * 308, not 307: these moves are permanent, and a permanent redirect is what
+   * passes the old URL's standing to the new one. A 307 asks a crawler to
+   * keep the old URL indexed, which is the opposite of what a rename wants.
+   *
+   * The split pages each redirect to the half that kept the page's primary
+   * job — the agreement for `/terms`, the data notice for `/privacy` — and
+   * both of those link to their other half in body copy, so a reader who
+   * wanted the cookie inventory is one labelled click away rather than lost.
+   *
+   * DO NOT DELETE THESE once traffic looks settled. Links on other people's
+   * sites do not expire, and these cost nothing to keep.
+   */
+  async redirects() {
+    return [
+      { source: "/about", destination: "/about-us", permanent: true },
+      { source: "/contact", destination: "/contact-us", permanent: true },
+      { source: "/privacy", destination: "/privacy-policy", permanent: true },
+      { source: "/terms", destination: "/terms-and-conditions", permanent: true },
+      /* Anchors people may have pasted at each other, pointed at the page
+         that now holds that section rather than at the page that lost it. */
+      { source: "/privacy/cookies", destination: "/cookie-policy", permanent: true },
+      { source: "/terms/disclaimer", destination: "/disclaimer", permanent: true },
+    ];
+  },
+
   outputFileTracingIncludes: {
     "/guides": ["./content/**/*"],
     "/guides/[slug]": ["./content/**/*", "./KNOWN-GAPS.md"],

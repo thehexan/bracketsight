@@ -263,7 +263,7 @@ export default function HubPage() {
 
         <ul className={styles.chips}>
           <li>
-            <Link href="/about" className={styles.chip}>
+            <Link href="/about-us" className={styles.chip}>
               About Bracketsight
             </Link>
           </li>
@@ -273,7 +273,7 @@ export default function HubPage() {
             </Link>
           </li>
           <li>
-            <Link href="/contact" className={styles.chip}>
+            <Link href="/contact-us" className={styles.chip}>
               Report a wrong figure
             </Link>
           </li>
@@ -288,7 +288,7 @@ export default function HubPage() {
         <div className={styles.workingsTail}>
           <p className={styles.workingsLead}>
             How this is funded, and the <span className={styles.chipMono}>55</span> items still
-            recorded as unverified: <Link href="/about">about Bracketsight</Link>. What a pass over{" "}
+            recorded as unverified: <Link href="/about-us">about Bracketsight</Link>. What a pass over{" "}
             <span className={styles.chipMono}>{proof.figures}</span> figures found, and which
             professional reviews have not happened yet:{" "}
             <Link href="/authors">who writes and checks this</Link>.
@@ -296,7 +296,7 @@ export default function HubPage() {
 
           <p className={styles.workingsLead}>
             Found a figure that is wrong?{" "}
-            <Link href="/contact">Report it and it gets fixed</Link> — checked against the primary
+            <Link href="/contact-us">Report it and it gets fixed</Link> — checked against the primary
             source, then logged in that tool&rsquo;s changelog. Never on a secondary source.
           </p>
         </div>

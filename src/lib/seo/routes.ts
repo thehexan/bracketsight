@@ -109,8 +109,8 @@ const STATIC: readonly StaticRoute[] = [
     lastModified: null,
   },
   {
-    path: "/about",
-    title: "About Bracketsight — how a rule becomes a number",
+    path: "/about-us",
+    title: "About Us — how a rule becomes a number",
     description:
       "How five US money-rule engines are built, funded and corrected: deterministic arithmetic, cited primary sources, and a register of unverified items.",
     section: null,
@@ -129,8 +129,8 @@ const STATIC: readonly StaticRoute[] = [
     lastModified: POLICY_UPDATED,
   },
   {
-    path: "/contact",
-    title: "Contact — report a wrong figure or a changed rule",
+    path: "/contact-us",
+    title: "Contact Us — report a wrong figure or a changed rule",
     description:
       "Email a correction, a rule that has changed, or a figure that looks wrong. Every report is checked against the primary source and logged in the changelog.",
     section: null,
@@ -139,18 +139,38 @@ const STATIC: readonly StaticRoute[] = [
     lastModified: POLICY_UPDATED,
   },
   {
-    path: "/privacy",
-    title: "Privacy and cookies — nothing you enter is stored",
+    path: "/privacy-policy",
+    title: "Privacy Policy — nothing you enter is stored",
     description:
-      "Every calculation runs in your browser: no account, no database, no server-side storage. What is stored, what advertising changes, and how to refuse it.",
+      "Every calculation runs in your browser: no account, no database and no server-side storage. What a server log holds, and your rights in the UK and the EU.",
     section: null,
     ogHeadline: "Nothing you enter leaves your browser",
     ogStrap: "No account, no database, no server-side storage",
     lastModified: POLICY_UPDATED,
   },
   {
-    path: "/terms",
-    title: "Terms and disclaimer — estimates, not advice",
+    path: "/cookie-policy",
+    title: "Cookie Policy — what is stored on your device",
+    description:
+      "No cookies of our own and no analytics that identify you. The two things stored on your device, how the consent banner works, and every way to refuse ads.",
+    section: null,
+    ogHeadline: "Two things, both on your own device",
+    ogStrap: "No cookies of our own · no consent vendor · refusal is the default",
+    lastModified: POLICY_UPDATED,
+  },
+  {
+    path: "/terms-and-conditions",
+    title: "Terms and Conditions — using these tools",
+    description:
+      "What you may do with these free tools, who owns the documents they generate, and where responsibility sits when a computed figure turns out to be wrong.",
+    section: null,
+    ogHeadline: "What you may do with these tools",
+    ogStrap: "Free commercially · you own what you generate · no warranty",
+    lastModified: POLICY_UPDATED,
+  },
+  {
+    path: "/disclaimer",
+    title: "Disclaimer — estimates from published rules, not advice",
     description:
       "These tools produce estimates from published rules, not financial, tax or legal advice. What each figure is, what it is not, and where the gaps are.",
     section: null,
