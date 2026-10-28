@@ -6,7 +6,7 @@ re-litigated, they are re-verified.
 Method: `NEXT_PUBLIC_SITE_URL=https://bracketsight.com npm run build` after `rm -rf .next/cache`,
 served with `next start -p 3320`, crawled with system Chrome over every rendered link plus every
 sitemap entry — **55 HTML pages**, each fetched twice, once with JavaScript enabled and once with
-it disabled. Publisher account `pub-3788258528493052`. The site has never been submitted.
+it disabled. Publisher account `pub-9291183762432851`. The site has never been submitted.
 
 **Guides-tree amendment, same day.** F1, W1 and W4 were the three findings the audit could only
 flag, because the guides tree belonged to the content agent. All three are now fixed and
@@ -428,7 +428,7 @@ one.
 ### Ad configuration
 
 **P30. `ads.txt`** — HTTP 200 at `/ads.txt`, `Content-Type: text/plain; charset=UTF-8`, record
-exact: `google.com, pub-3788258528493052, DIRECT, f08c47fec0942fa0`. Four comma-separated fields,
+exact: `google.com, pub-9291183762432851, DIRECT, f08c47fec0942fa0`. Four comma-separated fields,
 correct order, publisher ID matches the account, `DIRECT`, Google's certification authority ID, no
 stray records, five leading `#` comment lines that parsers ignore.
 
