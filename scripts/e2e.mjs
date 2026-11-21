@@ -71,8 +71,28 @@ async function evaluate(expression) {
 async function goto(path) {
   await send("Page.navigate", { url: `${ORIGIN}${path}` });
   await waitFor(`return document.readyState === "complete"`, `load ${path}`);
-  /* React hydration lands a tick after readyState. */
-  await evaluate(`return new Promise(r => setTimeout(r, 400));`);
+  /* A FIXED SLEEP HERE IS A BUG, and it is the kind that only shows up off
+     localhost. `readyState === "complete"` fires before layout has produced
+     innerText and well before React has hydrated; against an origin that
+     spends ~350ms per request, a 400ms guess expires first and the suite
+     reports a missing headline and a dead theme toggle on a site where both
+     work. Wait for the page to actually have rendered text instead. */
+  await waitFor(
+    `return (document.body?.innerText ?? "").trim().length > 200;`,
+    `rendered text on ${path}`,
+  );
+}
+
+/* React attaches listeners after paint, so an interaction can be dropped
+   silently if it lands first. Retry the action until the page agrees it
+   happened, rather than clicking once and trusting the timing. */
+async function clickUntil(actionExpr, conditionExpr, label, attempts = 10) {
+  for (let i = 0; i < attempts; i++) {
+    await evaluate(actionExpr);
+    await evaluate(`return new Promise(r => setTimeout(r, 300));`);
+    if (await evaluate(conditionExpr)) return;
+  }
+  throw new Error(`no effect after ${attempts} attempts: ${label}`);
 }
 
 /** Poll an expression returning boolean until true, or fail. */
@@ -192,13 +212,18 @@ async function run() {
     const before = await evaluate(
       `return document.documentElement.getAttribute("data-theme") ?? "system";`,
     );
-    await evaluate(`
+    await clickUntil(
+      `
       const btn = [...document.querySelectorAll("button")]
         .find(b => /theme|dark|light|appearance/i.test(b.getAttribute("aria-label") ?? b.innerText));
       if (btn) btn.click();
       return true;
-    `);
-    await evaluate(`return new Promise(r => setTimeout(r, 400));`);
+      `,
+      `return (document.documentElement.getAttribute("data-theme") ?? "system") !== ${JSON.stringify(
+        before,
+      )};`,
+      "theme toggle",
+    );
     const after = await evaluate(
       `return document.documentElement.getAttribute("data-theme") ?? "system";`,
     );
