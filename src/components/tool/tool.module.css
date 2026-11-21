@@ -202,12 +202,32 @@
   align-items: center;
   min-height: 44px;
   font-family: var(--font-data);
-  font-size: 10.5px;
-  letter-spacing: 0.11em;
+  /* Was 10.5px. Uppercase strips the word shapes a reader scans by, so small
+     AND capitalised is the worst pairing for a nav; the tracking is pulled in
+     a little as the size goes up, which is what keeps it reading as one word
+     per item rather than as spaced letters. */
+  font-size: 12px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--dim);
   text-decoration: none;
   transition: color var(--dur-fast) var(--ease);
+}
+
+/* The things you can DO in this section. Darker and heavier than the record
+   pages beside them, so the eye lands on the tool before the changelog. */
+.railLinkPrimary {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Separates doing from backing-up. A rule, not a bullet: it has to survive a
+   wrap onto a second line without looking like a list item. */
+.railDivider {
+  align-self: center;
+  width: 1px;
+  height: 14px;
+  background: var(--rule);
 }
 
 .railLink:hover {

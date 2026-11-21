@@ -31,31 +31,63 @@ export function SectionRail({ section, label }: { section: SectionSlug; label: s
   const pathname = usePathname() ?? "";
   const root = `/${section}`;
 
-  const items = [
+  /*
+   * TWO GROUPS, NOT EIGHT EQUAL ITEMS.
+   *
+   * Property's rail ran "The tool · Methodology · Sources · Editorial policy ·
+   * Changelog · About · Check an assessment · Counties covered" at one weight,
+   * which puts a thing you DO (check an assessment) below a record almost
+   * nobody opens first (changelog), and asks a reader to tell them apart by
+   * reading all eight.
+   *
+   * `SECTION_PAGES` already carries the distinction: `trust: false` is a page
+   * that does something, `trust: true` is a page that backs a number up. The
+   * rail now reads that flag rather than re-deciding it, so adding a page puts
+   * it in the right group by construction.
+   */
+  const pages = SECTION_PAGES[section];
+
+  const doing = [
     { href: root, label: "The tool" },
-    ...SECTION_PAGES[section].map((page) => ({
-      href: `${root}${page.href}`,
-      label: page.label,
-    })),
+    ...pages
+      .filter((page) => !page.trust)
+      .map((page) => ({ href: `${root}${page.href}`, label: page.label })),
   ];
+
+  const backing = pages
+    .filter((page) => page.trust)
+    .map((page) => ({ href: `${root}${page.href}`, label: page.label }));
+
+  const link = (item: { href: string; label: string }, primary: boolean) => {
+    const current = pathname === item.href;
+    return (
+      <li key={item.href}>
+        <Link
+          href={item.href}
+          aria-current={current ? "page" : undefined}
+          className={
+            `${styles.railLink}` +
+            (primary ? ` ${styles.railLinkPrimary}` : "") +
+            (current ? ` ${styles.railLinkCurrent}` : "")
+          }
+        >
+          {item.label}
+        </Link>
+      </li>
+    );
+  };
 
   return (
     <nav aria-label={label} className={`${styles.rail} surface-band`}>
       <ul className={`${styles.shell} ${styles.railList}`}>
-        {items.map((item) => {
-          const current = pathname === item.href;
-          return (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                aria-current={current ? "page" : undefined}
-                className={`${styles.railLink}${current ? ` ${styles.railLinkCurrent}` : ""}`}
-              >
-                {item.label}
-              </Link>
-            </li>
-          );
-        })}
+        {doing.map((item) => link(item, true))}
+        {backing.length > 0 ? (
+          /* Decorative: the grouping is already conveyed by order and weight,
+             and a screen reader reading "separator" between every rail would
+             be noise rather than structure. */
+          <li aria-hidden="true" className={styles.railDivider} />
+        ) : null}
+        {backing.map((item) => link(item, false))}
       </ul>
     </nav>
   );
