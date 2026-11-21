@@ -83,3 +83,11 @@
   tax rate applied to a forgiven balance, for example — it is labelled an
   assumption at the point it is shown.
 - Contact for corrections: info@bracketsight.com
+
+## Full text
+
+- [/llms-full.txt](/llms-full.txt): every guide on this site in full, in one
+  plain-text file, with each figure resolved to the value its engine computes
+  and each guide's primary sources listed with the date each was last read.
+  Generated at build time from the same files the pages render from, so it
+  cannot fall out of step with them.
