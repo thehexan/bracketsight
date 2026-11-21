@@ -83,14 +83,30 @@ export function HeroNumber({
   const labelId = id ? `${id}-label` : undefined;
 
   return (
-    <div className={["flex flex-col gap-1", className].filter(Boolean).join(" ")}>
+    /*
+     * THE NAME GOES ON THE GROUP, NOT THE SPAN.
+     *
+     * A bare `span` has the implicit role `generic`, and generic prohibits
+     * naming — so `aria-labelledby` on the figure itself was ignored by the
+     * accessibility tree and reported as a level A failure on /aca, /loans
+     * and /paycheck. The association was never reaching assistive tech; it
+     * only looked like it was.
+     *
+     * `role="group"` does permit a name, so the wrapper carries it and reads
+     * as "What RAP costs you in total, $62,546" — label and figure together,
+     * which is the thing that was wanted all along.
+     */
+    <div
+      role="group"
+      aria-labelledby={labelId}
+      className={["flex flex-col gap-1", className].filter(Boolean).join(" ")}
+    >
       <span className="micro-label" id={labelId}>
         {label}
       </span>
 
       <span
         id={id}
-        aria-labelledby={labelId}
         className="num text-ink"
         style={{
           fontSize: "var(--text-step-4)",

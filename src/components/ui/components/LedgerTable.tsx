@@ -162,7 +162,12 @@ export function LedgerTable({
                         : "2px solid transparent",
                     }}
                   >
-                    <span className="flex items-center gap-2">
+                    {/* `div`, not `span`: a cell's content can be block-level
+                        — the trades takeoff puts a Disclosure in here — and a
+                        span cannot legally contain one. The parent is a
+                        `th`/`td`, which takes flow content, so this is the
+                        right element for a flex row that wraps real blocks. */}
+                    <div className="flex items-center gap-2">
                       {row.trace ? (
                         <button
                           type="button"
@@ -191,7 +196,7 @@ export function LedgerTable({
                       )}
 
                       {row.winner ? <WinnerMark /> : null}
-                    </span>
+                    </div>
                   </th>
 
                   {row.disabled ? (

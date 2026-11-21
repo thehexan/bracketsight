@@ -56,6 +56,19 @@ export interface FieldProps {
   required?: boolean;
   /** id of the control this field labels. Also seeds the hint/error ids. */
   htmlFor: string;
+  /**
+   * True when the child is a GROUP of controls — a `RadioGroup`, a segmented
+   * control — rather than one labelable element.
+   *
+   * `<label for>` must point at the id of a real, non-hidden form control. A
+   * radiogroup is a `div` with no id of its own and its radios are named
+   * `${name}-${value}`, so `for` pointed at nothing: an HTML validity error
+   * and a WCAG level A failure on five pages. Nothing was actually unlabelled
+   * — `RadioGroup` names itself with `aria-labelledby={htmlFor}-label`, which
+   * is the right mechanism for a group — so the fix is to stop emitting the
+   * `for` that could never resolve, not to invent an id for it to point at.
+   */
+  group?: boolean;
   className?: string;
   children: React.ReactNode;
 }
@@ -66,6 +79,7 @@ export function Field({
   error,
   required = false,
   htmlFor,
+  group = false,
   className,
   children,
 }: FieldProps) {
@@ -95,7 +109,7 @@ export function Field({
     <div className={cx("flex flex-col gap-1", className)}>
       <label
         id={labelId}
-        htmlFor={htmlFor}
+        htmlFor={group ? undefined : htmlFor}
         className="font-medium text-ink"
         style={{ fontSize: "var(--text-step--1)" }}
       >

@@ -588,7 +588,7 @@ export function Calculator() {
         </Fieldset>
 
         <Fieldset legend="Overtime">
-          <Field htmlFor="otMode" label="How do you want to enter overtime?">
+          <Field htmlFor="otMode" group label="How do you want to enter overtime?">
             <RadioGroup
               name="otMode"
               labelledBy="otMode-label"

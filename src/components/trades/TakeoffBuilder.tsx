@@ -297,7 +297,17 @@ export default function TakeoffBuilder() {
     id: li.id,
     cells: {
       item: (
-        <span
+        /*
+         * `div`, not `span`. `lineTrace` returns a Disclosure, which renders
+         * divs, and a div inside a span is invalid HTML — five of these on
+         * /trades, reported as "Element div not allowed as child element in
+         * this context". A span is phrasing content and cannot contain flow
+         * content; the cell these land in is a `th`/`td`, both of which take
+         * flow content, so the block elements belong here and the span never
+         * did. `.no-print` is matched by class, so the print rules are
+         * unaffected.
+         */
+        <div
           className="flex min-w-0 flex-col items-start gap-1"
           style={{ maxWidth: "20rem", ...lineAnimation(index, lineCount) }}
         >
@@ -307,8 +317,8 @@ export default function TakeoffBuilder() {
               {a}
             </span>
           ))}
-          <span className="no-print">{lineTrace(li)}</span>
-        </span>
+          <div className="no-print">{lineTrace(li)}</div>
+        </div>
       ),
       qty: (
         <NumberInput
@@ -415,7 +425,7 @@ export default function TakeoffBuilder() {
           onSubmit={(e) => e.preventDefault()}
         >
           <div className="flex flex-col gap-5">
-          <Field label="Trade" htmlFor="trade">
+          <Field label="Trade" htmlFor="trade" group>
             <RadioGroup
               name="trade"
               value={trade}
@@ -467,7 +477,7 @@ export default function TakeoffBuilder() {
             </div>
           </fieldset>
 
-          <Field label="Materials grade" htmlFor="grade">
+          <Field label="Materials grade" htmlFor="grade" group>
             <RadioGroup
               name="grade"
               value={grade}

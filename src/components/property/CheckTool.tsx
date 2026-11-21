@@ -360,7 +360,7 @@ export function CheckTool({
           />
         </Field>
 
-        <Field htmlFor="propertyClass" label="What kind of property is it?">
+        <Field htmlFor="propertyClass" group label="What kind of property is it?">
           <RadioGroup
             name="propertyClass"
             labelledBy="propertyClass-label"

@@ -442,6 +442,7 @@ export function Planner() {
           <Field
             label="High-deductible health plan"
             htmlFor="hdhpCoverage"
+            group
             hint="An HSA contribution requires a qualifying HDHP."
           >
             <RadioGroup
