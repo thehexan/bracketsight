@@ -39,8 +39,8 @@
      geometric series (×1.25 each), so a size on the home page is still a rung on
      this ladder rather than a number somebody liked. NOTHING outside
      home.module.css should reach for them: body h1/h2 stay at steps 3 and 2. */
-  --text-step--2: 0.694rem;
-  --text-step--1: 0.833rem;
+  --text-step--2: 0.75rem;
+  --text-step--1: 0.875rem;
   --text-step-0: 1rem;
   --text-step-1: 1.25rem;
   --text-step-2: 1.563rem;
@@ -454,7 +454,7 @@
     color: var(--ink);
     font-family: var(--font-body);
     font-size: var(--text-step-0);
-    line-height: 1.5;
+    line-height: 1.6;
   }
   /* A section wrapper repaints the ground under its own subtree. */
   [data-section] {
@@ -549,11 +549,11 @@
     --cell-pad-x: 12px;
     --row-h: 32px;
     font-size: var(--text-step--1);
-    line-height: 1.35;
+    line-height: 1.45;
   }
   .density-reading {
     max-width: var(--measure);
-    line-height: 1.5;
+    line-height: 1.65;
   }
   .density-reading > * + * {
     margin-top: var(--spacing-6);
