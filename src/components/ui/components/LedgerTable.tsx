@@ -172,7 +172,18 @@ export function LedgerTable({
                         <button
                           type="button"
                           aria-expanded={isOpen}
-                          aria-controls={traceId}
+                          /*
+                           * Only while the panel exists. The trace row below
+                           * is mounted on open, so a constant `aria-controls`
+                           * pointed at an id that was not in the document for
+                           * every closed row — 10 dangling references across
+                           * /aca and /property/check, and a reference that
+                           * resolves to nothing is worse than no reference at
+                           * all. `aria-expanded` carries the state either way,
+                           * and it is `aria-expanded` that the disclosure
+                           * pattern actually requires.
+                           */
+                          aria-controls={isOpen ? traceId : undefined}
                           onClick={() => setOpenTrace(isOpen ? null : row.id)}
                           // The row's own name is the trace toggle, so on a
                           // phone it has to clear the touch floor; on a
