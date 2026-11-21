@@ -68,7 +68,19 @@ export function Disclosure({
         id={`${id}-summary`}
         aria-expanded={open}
         aria-controls={panelId}
-        aria-label={summaryLabel}
+        /*
+         * LABEL IN NAME (WCAG 2.5.3, level A). `aria-label` REPLACES the
+         * button's accessible name rather than adding to it, so setting it
+         * over visible text makes the two disagree — and a voice-control user
+         * who says the words they can see then cannot activate the control.
+         * Every "How this was calculated" toggle on the site is this button.
+         *
+         * `summaryLabel` exists for the case the prop comment describes: a
+         * `summary` that is not plain text and so cannot name the button by
+         * itself. When the summary IS a string it already names the button
+         * correctly, and overriding it can only do harm.
+         */
+        aria-label={typeof summary === "string" ? undefined : summaryLabel}
         onClick={() => setOpen((value) => !value)}
         className={cx(
           "flex min-h-11 items-center gap-2 rounded-atlas text-left transition-colors",
